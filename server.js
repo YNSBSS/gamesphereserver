@@ -6,8 +6,9 @@ const cors = require("cors");
 const app = express();
 const PORT = 5000;
 
-app.use(cors()); // allow frontend to connect
-app.use(bodyParser.json({ limit: "10mb" }));
+app.use(cors({
+  origin: "*"  // or "*" to allow any origin
+}));app.use(bodyParser.json({ limit: "10mb" }));
 
 app.post("/send-email", async (req, res) => {
   const { firstName, lastName, email, matricule, qrDataUrl } = req.body;
@@ -152,4 +153,5 @@ app.post("/send-email", async (req, res) => {
 
 
 app.listen(PORT, () => {
+  console.log(`Server listening on http://localhost:${PORT}`);
 });
